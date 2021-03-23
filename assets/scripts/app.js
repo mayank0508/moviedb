@@ -26,5 +26,5 @@ const CancelButton = () => {
 
 
 startAddMovieModal.addEventListener('click',toggleMovieModal);
-backgroundModel.addEventListener('click',toggleMovieModal);
-cancelModal.addEventListener('click',toggleMovieModal);
+backgroundModel.addEventListener('click',backdropClick);
+cancelModal.addEventListener('click',CancelButton);
