@@ -5,5 +5,9 @@ const startAddMovieModal = document.querySelector('header button')
 // const modalaction = document.getElementsByClassName('modal__action');
 // const modalcontent = document.getElementsByClassName('modal__content');
 
-console.log(addMovieModal);
-console.log(startAddMovieModal);
+const toggleMovieModal = () => {
+    addMovieModal.classList.toggle('visible');
+}
+
+
+startAddMovieModal.addEventListener('click',toggleMovieModal);
