@@ -13,7 +13,22 @@ const initialText = document.getElementById('entry-text');
 
 const newMovie = [];
 
-
+const renderMovieButton = () => {
+    const newMovieElement = document.createElement('li');
+    //const newMovieElement = document.getElementsByClassName('movie-element');
+    newMovieElement.className = 'movie-element';
+    newMovieElement.innerHTML = `
+    <div class="movie-element__image">
+    <img src="${imageURLValue}" alt="${title}">
+    </div>
+    <div class="movie-element__info">
+    <h2>${title}</h2>
+    <p>${rating}/5 Stars</p>
+    </div>
+    `;
+    const listRoot = document.getElementById('movie-list');
+    listRoot.append(newMovieElement);
+}
 
 const updateUI = () => {
     if (newMovie.length === 0){
@@ -76,6 +91,7 @@ const addButton = () => {
     console.log(newMovie); // used to display the data in the V8 engine
     toggleMovieModal(); // used to close the modal
     usrClearInput();
+    renderMovieButton(newMovieElement.ImageURL, newMovieElement.title, newMovieElement.rating);
     updateUI();
 }
 
