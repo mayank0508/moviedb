@@ -10,6 +10,8 @@ const inputModal = addMovieModal.querySelectorAll('input');
 // const modalcontent = document.getElementsByClassName('modal__content');
 // const backgroundModal = document.body.firstElementChild;
 
+const newMovie = [];
+
 const toggleMovieModal = () => {
     addMovieModal.classList.toggle('visible');
     toggleBackdropModal();
@@ -21,11 +23,20 @@ const toggleBackdropModal = () => {
 
 const backdropClick = () => {
     toggleMovieModal();
+    usrClearInput();
+}
+
+const usrClearInput = () => {
+    for (const clrInput of inputModal){
+        clrInput.value = '';
+    }
 }
 
 const CancelButton = () => {
    toggleMovieModal();
+   usrClearInput();
 }
+
 
 const addButton = () => {
    const titleValue = inputModal[0].value;
@@ -42,6 +53,18 @@ const addButton = () => {
         alert("Plz enter valid inputs !")
         return;
     }
+
+    const movieHandler = {
+        title: titleValue,
+        ImageURL: imageURLValue,
+        rating: ratingValue,
+
+    };
+
+    newMovie.push(movieHandler) // used to puch the data from add button to the movie
+    console.log(newMovie); // used to display the data in the V8 engine
+    toggleMovieModal; // used to close the modal
+    usrClearInput;
 }
 
 startAddMovieModal.addEventListener('click',toggleMovieModal);
