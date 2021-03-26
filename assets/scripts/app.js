@@ -13,13 +13,13 @@ const initialText = document.getElementById('entry-text');
 
 const newMovie = [];
 
-const renderMovieButton = () => {
+const renderMovieButton = (title, imageURL, rating) => {
     const newMovieElement = document.createElement('li');
     //const newMovieElement = document.getElementsByClassName('movie-element');
     newMovieElement.className = 'movie-element';
     newMovieElement.innerHTML = `
     <div class="movie-element__image">
-    <img src="${imageURLValue}" alt="${title}">
+    <img src="${imageURL}" alt="${title}">
     </div>
     <div class="movie-element__info">
     <h2>${title}</h2>
@@ -91,7 +91,7 @@ const addButton = () => {
     console.log(newMovie); // used to display the data in the V8 engine
     toggleMovieModal(); // used to close the modal
     usrClearInput();
-    renderMovieButton(newMovieElement.ImageURL, newMovieElement.title, newMovieElement.rating);
+    renderMovieButton( movieHandler.title,movieHandler.ImageURL, movieHandler.rating);
     updateUI();
 }
 
