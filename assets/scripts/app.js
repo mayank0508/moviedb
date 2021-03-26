@@ -4,6 +4,7 @@ const startAddMovieModal = document.querySelector('header button');
 const cancelModal = addMovieModal.querySelector('.btn--passive');
 const addMovieButton = cancelModal.nextElementSibling;
 const inputModal = addMovieModal.querySelectorAll('input');
+const initialText = document.getElementById('entry-text');
 //const inputModal = document.getElementsByTagName('input');
 //const startAddMovieModal = document.querySelector('header').lastElementChild;
 // const modalaction = document.getElementsByClassName('modal__action');
@@ -11,6 +12,16 @@ const inputModal = addMovieModal.querySelectorAll('input');
 // const backgroundModal = document.body.firstElementChild;
 
 const newMovie = [];
+
+
+
+const updateUI = () => {
+    if (newMovie.length === 0){
+        initialText.style.display = 'block';
+    } else{
+        initialText.style.display = 'none';
+    }
+}
 
 const toggleMovieModal = () => {
     addMovieModal.classList.toggle('visible');
@@ -63,8 +74,9 @@ const addButton = () => {
 
     newMovie.push(movieHandler) // used to puch the data from add button to the movie
     console.log(newMovie); // used to display the data in the V8 engine
-    toggleMovieModal; // used to close the modal
-    usrClearInput;
+    toggleMovieModal(); // used to close the modal
+    usrClearInput();
+    updateUI();
 }
 
 startAddMovieModal.addEventListener('click',toggleMovieModal);
