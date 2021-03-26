@@ -3,7 +3,7 @@ const backgroundModel = document.getElementById('backdrop');
 const startAddMovieModal = document.querySelector('header button');
 const cancelModal = addMovieModal.querySelector('.btn--passive');
 const addMovieButton = cancelModal.nextElementSibling;
-const inputModal = addMovieButton.querySelectorAll('input');
+const inputModal = addMovieModal.querySelectorAll('input');
 //const inputModal = document.getElementsByTagName('input');
 //const startAddMovieModal = document.querySelector('header').lastElementChild;
 // const modalaction = document.getElementsByClassName('modal__action');
@@ -28,16 +28,16 @@ const CancelButton = () => {
 }
 
 const addButton = () => {
-   const titleValue = userInput[0].value;
-   const imageURLValue = userInput[1].value;
-   const ratingValue = userInput[2].value;
+   const titleValue = inputModal[0].value;
+   const imageURLValue = inputModal[1].value;
+   const ratingValue = inputModal[2].value;
 
    if (
     titleValue === " " ||
     imageURLValue === " " ||
     ratingValue === " " ||
     +ratingValue < 1 || 
-    +rating > 5
+    +ratingValue > 5
     ) {
         alert("Plz enter valid inputs !")
         return;
@@ -46,5 +46,5 @@ const addButton = () => {
 
 startAddMovieModal.addEventListener('click',toggleMovieModal);
 backgroundModel.addEventListener('click',backdropClick);
-cancelModal.addEventListener('click',CancelButton);
-addMovieButton.addEventListener('click',addButton)
+cancelModal.addEventListener('click', CancelButton);
+addMovieButton.addEventListener('click', addButton)
