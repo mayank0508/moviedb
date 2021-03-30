@@ -13,7 +13,29 @@ const initialText = document.getElementById('entry-text');
 
 const newMovie = [];
 
-const renderMovieButton = (title, imageURL, rating) => {
+const updateUI = () => {
+    if (newMovie.length === 0){
+        initialText.style.display = 'block';
+    } else{
+        initialText.style.display = 'none';
+    }
+};
+
+const deleteMovieHandler = (movieId) => {
+    let movieIndex = 0; 
+    for (const movie of newMovie) {
+      if(movie.id === movieId){
+         break;
+      }
+      movieIndex++;
+  }
+  newMovie.splice(movieIndex,1);
+  const listRoot = document.getElementById('movie-list');
+  listRoot.children[movieIndex].remove();
+  //listRoot.removeChild(listRoot.children[movieIndex]);
+};
+
+const renderMovieButton = (id, title, imageURL, rating) => {
     const newMovieElement = document.createElement('li');
     //const newMovieElement = document.getElementsByClassName('movie-element');
     newMovieElement.className = 'movie-element';
@@ -26,17 +48,11 @@ const renderMovieButton = (title, imageURL, rating) => {
     <p>${rating}/5 Stars</p>
     </div>
     `;
+    newMovieElement.addEventListener('click',deleteMovieHandler.bind(null,id));
     const listRoot = document.getElementById('movie-list');
     listRoot.append(newMovieElement);
 }
 
-const updateUI = () => {
-    if (newMovie.length === 0){
-        initialText.style.display = 'block';
-    } else{
-        initialText.style.display = 'none';
-    }
-}
 
 const toggleMovieModal = () => {
     addMovieModal.classList.toggle('visible');
@@ -81,6 +97,7 @@ const addButton = () => {
     }
 
     const movieHandler = {
+        id: Math.random().toString(),
         title: titleValue,
         ImageURL: imageURLValue,
         rating: ratingValue,
@@ -91,7 +108,7 @@ const addButton = () => {
     console.log(newMovie); // used to display the data in the V8 engine
     toggleMovieModal(); // used to close the modal
     usrClearInput();
-    renderMovieButton( movieHandler.title,movieHandler.ImageURL, movieHandler.rating);
+    renderMovieButton(movieHandler.id,movieHandler.title,movieHandler.ImageURL, movieHandler.rating);
     updateUI();
 }
 
