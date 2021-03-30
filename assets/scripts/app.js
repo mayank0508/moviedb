@@ -5,6 +5,7 @@ const cancelModal = addMovieModal.querySelector('.btn--passive');
 const addMovieButton = cancelModal.nextElementSibling;
 const inputModal = addMovieModal.querySelectorAll('input');
 const initialText = document.getElementById('entry-text');
+const deleteMovieModal = document.getElementById('delete-modal');
 //const inputModal = document.getElementsByTagName('input');
 //const startAddMovieModal = document.querySelector('header').lastElementChild;
 // const modalaction = document.getElementsByClassName('modal__action');
@@ -21,7 +22,7 @@ const updateUI = () => {
     }
 };
 
-const deleteMovieHandler = (movieId) => {
+const deleteMovie = (movieId) => {
     let movieIndex = 0; 
     for (const movie of newMovie) {
       if(movie.id === movieId){
@@ -33,6 +34,16 @@ const deleteMovieHandler = (movieId) => {
   const listRoot = document.getElementById('movie-list');
   listRoot.children[movieIndex].remove();
   //listRoot.removeChild(listRoot.children[movieIndex]);
+}
+
+const cancelMovieDelete = () => {
+    toggleBackdropModal();
+    deleteMovieModal.classList.remove('visible');
+};
+
+const deleteMovieHandler = movieId => {
+   deleteMovieModal.classList.add('visible');
+   toggleBackdropModal();
 };
 
 const renderMovieButton = (id, title, imageURL, rating) => {
@@ -53,19 +64,19 @@ const renderMovieButton = (id, title, imageURL, rating) => {
     listRoot.append(newMovieElement);
 }
 
-
-const toggleMovieModal = () => {
-    addMovieModal.classList.toggle('visible');
-    toggleBackdropModal();
-}
-
 const toggleBackdropModal = () => {
-   backgroundModel.classList.toggle('visible');
+    backgroundModel.classList.toggle('visible');
+ }
+
+
+const closeMovieModal = () => {
+    addMovieModal.classList.remove('visible');
 }
 
-const backdropClick = () => {
-    toggleMovieModal();
-    usrClearInput();
+const showMovieModal = () => {
+    //function
+    addMovieModal.classList.add('visible');
+    toggleBackdropModal();
 }
 
 const usrClearInput = () => {
@@ -75,7 +86,7 @@ const usrClearInput = () => {
 }
 
 const CancelButton = () => {
-   toggleMovieModal();
+   closeMovieModal();
    usrClearInput();
 }
 
@@ -106,13 +117,20 @@ const addButton = () => {
 
     newMovie.push(movieHandler) // used to puch the data from add button to the movie
     console.log(newMovie); // used to display the data in the V8 engine
-    toggleMovieModal(); // used to close the modal
+    closeMovieModal(); // used to close the modal
+    toggleBackdropModal();
     usrClearInput();
     renderMovieButton(movieHandler.id,movieHandler.title,movieHandler.ImageURL, movieHandler.rating);
     updateUI();
-}
+};
 
-startAddMovieModal.addEventListener('click',toggleMovieModal);
+const backdropClick = () => {
+    closeMovieModal();
+    cancelMovieDelete();
+};
+
+
+startAddMovieModal.addEventListener('click',showMovieModal);
 backgroundModel.addEventListener('click',backdropClick);
 cancelModal.addEventListener('click', CancelButton);
 addMovieButton.addEventListener('click', addButton)
